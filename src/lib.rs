@@ -257,7 +257,11 @@ functions:
     fn xkb_state_key_get_utf32(*mut xkb_state, xkb_keycode_t) -> u32,
     fn xkb_state_key_get_one_sym(*mut xkb_state, xkb_keycode_t) -> xkb_keysym_t,
     fn xkb_state_mod_name_is_active(*mut xkb_state, *const c_char, xkb_state_component) -> c_int,
+);
 
+// Compose and dead-keys support module
+dlopen_external_library!(XkbCommonCompose,
+functions:
     fn xkb_compose_table_new_from_locale(
         *mut xkb_context,
         *const c_char,
@@ -282,5 +286,11 @@ lazy_static!(
     };
     pub static ref XKBCOMMON_HANDLE: &'static XkbCommon = {
         XKBCOMMON_OPTION.as_ref().expect("Library libxkbcommon.so could not be loaded.")
+    };
+    pub static ref XKBCOMMON_COMPOSE_OPTION: Option<XkbCommonCompose> = {
+        XkbCommonCompose::open("libxkbcommon.so").ok()
+    };
+    pub static ref XKBCOMMON_COMPOSE_HANDLE: &'static XkbCommonCompose = {
+        XKBCOMMON_COMPOSE_OPTION.as_ref().expect("Could not load compose module from libxkbcommon.so.")
     };
 );
