@@ -1,0 +1,17 @@
+[package]
+name = "xkbcommon-dl"
+version = "0.1.0"
+documentation = "https://docs.rs/xkbcommon-dl/"
+repository = "https://github.com/francesca64/xkbcommon-dl"
+authors = ["Francesca Frangipane <francesca@comfysoft.net>"]
+license = "MIT"
+description = "Dynamically loaded xkbcommon and xkbcommon-x11 Rust bindings."
+
+[badges]
+travis-ci = { repository = "francesca64/xkbcommon-dl" }
+
+[dependencies]
+dlib = "0.4"
+lazy_static = "1.0"
+bitflags = "1.0"
+x11-dl = "2.17"
