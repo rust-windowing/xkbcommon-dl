@@ -468,25 +468,25 @@
     <span class="doccomment">/// The key was released.</span>
     <span class="ident">XKB_KEY_UP</span>,
     <span class="doccomment">/// The key was pressed.</span>
-    <span class="ident">XKB_KEY_DOWN</span>
+    <span class="ident">XKB_KEY_DOWN</span>,
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">xkb_compose_compile_flags</span> {
-    <span class="ident">XKB_COMPOSE_COMPILE_NO_FLAGS</span> <span class="op">=</span> <span class="number">0</span>
+    <span class="ident">XKB_COMPOSE_COMPILE_NO_FLAGS</span> <span class="op">=</span> <span class="number">0</span>,
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">xkb_compose_format</span> {
-    <span class="ident">XKB_COMPOSE_FORMAT_TEXT_V1</span> <span class="op">=</span> <span class="number">1</span>
+    <span class="ident">XKB_COMPOSE_FORMAT_TEXT_V1</span> <span class="op">=</span> <span class="number">1</span>,
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">xkb_compose_state_flags</span> {
-    <span class="ident">XKB_COMPOSE_STATE_NO_FLAGS</span> <span class="op">=</span> <span class="number">0</span>
+    <span class="ident">XKB_COMPOSE_STATE_NO_FLAGS</span> <span class="op">=</span> <span class="number">0</span>,
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
@@ -495,14 +495,14 @@
     <span class="ident">XKB_COMPOSE_NOTHING</span>,
     <span class="ident">XKB_COMPOSE_COMPOSING</span>,
     <span class="ident">XKB_COMPOSE_COMPOSED</span>,
-    <span class="ident">XKB_COMPOSE_CANCELLED</span>
+    <span class="ident">XKB_COMPOSE_CANCELLED</span>,
 }
 
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">xkb_compose_feed_result</span> {
     <span class="ident">XKB_COMPOSE_FEED_IGNORED</span>,
-    <span class="ident">XKB_COMPOSE_FEED_ACCEPTED</span>
+    <span class="ident">XKB_COMPOSE_FEED_ACCEPTED</span>,
 }
 
 <span class="macro">bitflags</span><span class="macro">!</span>(
