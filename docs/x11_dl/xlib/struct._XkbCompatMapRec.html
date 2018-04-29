@@ -10,10 +10,11 @@
     <title>x11_dl::xlib::_XkbCompatMapRec - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css"
+          id="mainThemeStyle">
     
     <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
+    <link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle">
     <script src="../../storage.js"></script>
     
 
@@ -33,7 +34,7 @@
     <nav class="sidebar">
         <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Struct _XkbCompatMapRec</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#fields">Fields</a><div class="sidebar-links"><a href="#structfield.sym_interpret">sym_interpret</a><a href="#structfield.groups">groups</a><a href="#structfield.num_si">num_si</a><a href="#structfield.size_si">size_si</a></div></div><p class='location'><a href='../index.html'>x11_dl</a>::<wbr><a href='index.html'>xlib</a></p><script>window.sidebarCurrent = {name: '_XkbCompatMapRec', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
+        <p class='location'>Struct _XkbCompatMapRec</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#fields">Fields</a><div class="sidebar-links"><a href="#structfield.sym_interpret">sym_interpret</a><a href="#structfield.groups">groups</a><a href="#structfield.num_si">num_si</a><a href="#structfield.size_si">size_si</a></div><a class="sidebar-title" href="#synthetic-implementations">Auto Trait Implementations</a><div class="sidebar-links"><a href="#impl-Send">!Send</a><a href="#impl-Sync">!Sync</a></div></div><p class='location'><a href='../index.html'>x11_dl</a>::<wbr><a href='index.html'>xlib</a></p><script>window.sidebarCurrent = {name: '_XkbCompatMapRec', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
     </nav>
 
     <div class="theme-picker">
@@ -54,19 +55,17 @@
         </form>
     </nav>
 
-    <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>x11_dl</a>::<wbr><a href='index.html'>xlib</a>::<wbr><a class="struct" href=''>_XkbCompatMapRec</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content"><h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>x11_dl</a>::<wbr><a href='index.html'>xlib</a>::<wbr><a class="struct" href=''>_XkbCompatMapRec</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/x11_dl/xlib.rs.html#1627-1632' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+               </span><a class='srclink' href='../../src/x11_dl/xlib.rs.html#1627-1632' title='goto source code'>[src]</a></span></h1><div class="docblock type-decl"><pre class='rust struct'><div class="docblock attributes">#[repr(C)]
 </div>pub struct _XkbCompatMapRec {
     pub sym_interpret: <a class="type" href="../../x11_dl/xlib/type.XkbSymInterpretPtr.html" title="type x11_dl::xlib::XkbSymInterpretPtr">XkbSymInterpretPtr</a>,
     pub groups: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="type" href="../../x11_dl/xlib/type.XkbModsRec.html" title="type x11_dl::xlib::XkbModsRec">XkbModsRec</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 4]</a>,
     pub num_si: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ushort.html" title="type std::os::raw::c_ushort">c_ushort</a>,
     pub size_si: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ushort.html" title="type std::os::raw::c_ushort">c_ushort</a>,
-}</pre><h2 id='fields' class='fields small-section-header'>
+}</pre></div><h2 id='fields' class='fields small-section-header'>
                        Fields<a href='#fields' class='anchor'></a></h2><span id="structfield.sym_interpret" class="structfield small-section-header">
                            <a href="#structfield.sym_interpret" class="anchor field"></a>
                            <span id="sym_interpret.v" class='invisible'>
@@ -83,7 +82,17 @@
                            <a href="#structfield.size_si" class="anchor field"></a>
                            <span id="size_si.v" class='invisible'>
                            <code>size_si: <a class="type" href="https://doc.rust-lang.org/nightly/std/os/raw/type.c_ushort.html" title="type std::os::raw::c_ushort">c_ushort</a></code>
-                           </span></span></section>
+                           </span></span>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+            <div id='implementations-list'>
+        </div>
+                <h2 id='synthetic-implementations' class='small-section-header'>
+                  Auto Trait Implementations<a href='#synthetic-implementations' class='anchor'></a>
+                </h2>
+                <div id='synthetic-implementations-list'>
+            <h3 id='impl-Send' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> for <a class="struct" href="../../x11_dl/xlib/struct._XkbCompatMapRec.html" title="struct x11_dl::xlib::_XkbCompatMapRec">_XkbCompatMapRec</a></code><a href='#impl-Send' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div><h3 id='impl-Sync' class='impl'><span class='in-band'><table class='table-display'><tbody><tr><td><code>impl !<a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> for <a class="struct" href="../../x11_dl/xlib/struct._XkbCompatMapRec.html" title="struct x11_dl::xlib::_XkbCompatMapRec">_XkbCompatMapRec</a></code><a href='#impl-Sync' class='anchor'></a></span></td><td><span class='out-of-band'></span></td></tr></tbody></table></h3><div class='impl-items'></div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
