@@ -1,5 +1,4 @@
 (function() {var implementors = {};
-implementors["bitflags"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/iter/traits/trait.FromIterator.html\" title=\"trait core::iter::traits::FromIterator\">FromIterator</a>&lt;<a class=\"struct\" href=\"bitflags/example_generated/struct.Flags.html\" title=\"struct bitflags::example_generated::Flags\">Flags</a>&gt; for <a class=\"struct\" href=\"bitflags/example_generated/struct.Flags.html\" title=\"struct bitflags::example_generated::Flags\">Flags</a>",];
 implementors["xkbcommon_dl"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/iter/traits/trait.FromIterator.html\" title=\"trait core::iter::traits::FromIterator\">FromIterator</a>&lt;<a class=\"struct\" href=\"xkbcommon_dl/struct.xkb_state_component.html\" title=\"struct xkbcommon_dl::xkb_state_component\">xkb_state_component</a>&gt; for <a class=\"struct\" href=\"xkbcommon_dl/struct.xkb_state_component.html\" title=\"struct xkbcommon_dl::xkb_state_component\">xkb_state_component</a>",];
 
             if (window.register_implementors) {

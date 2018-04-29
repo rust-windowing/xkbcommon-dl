@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libloading-0.4.3/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/travis/.cargo/registry/src/github.com-1ecc6299db9ec823/libloading-0.5.0/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -364,10 +364,6 @@
 <span id="308">308</span>
 <span id="309">309</span>
 <span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! A memory-safer wrapper around system dynamic library loading primitives.</span>
 <span class="doccomment">//!</span>
@@ -388,7 +384,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```toml</span>
 <span class="doccomment">//! [dependencies]</span>
-<span class="doccomment">//! libloading = &quot;0.4&quot;</span>
+<span class="doccomment">//! libloading = &quot;0.5&quot;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Then inside your project</span>
@@ -411,10 +407,6 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>;
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">lazy_static</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">os</span>::<span class="ident">unix</span> <span class="kw">as</span> <span class="ident">imp</span>;
