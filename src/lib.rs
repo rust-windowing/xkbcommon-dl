@@ -279,13 +279,13 @@ functions:
 
 lazy_static!(
     pub static ref XKBCOMMON_OPTION: Option<XkbCommon> = {
-        XkbCommon::open("libxkbcommon.so").ok()
+        unsafe { XkbCommon::open("libxkbcommon.so") }.ok()
     };
     pub static ref XKBCOMMON_HANDLE: &'static XkbCommon = {
         XKBCOMMON_OPTION.as_ref().expect("Library libxkbcommon.so could not be loaded.")
     };
     pub static ref XKBCOMMON_COMPOSE_OPTION: Option<XkbCommonCompose> = {
-        XkbCommonCompose::open("libxkbcommon.so").ok()
+        unsafe { XkbCommonCompose::open("libxkbcommon.so") }.ok()
     };
     pub static ref XKBCOMMON_COMPOSE_HANDLE: &'static XkbCommonCompose = {
         XKBCOMMON_COMPOSE_OPTION.as_ref().expect("Could not load compose module from libxkbcommon.so.")

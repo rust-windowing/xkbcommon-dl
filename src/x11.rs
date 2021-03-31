@@ -42,7 +42,7 @@ functions:
 
 lazy_static!(
     pub static ref XKBCOMMON_X11_OPTION: Option<XkbCommonX11> = {
-        XkbCommonX11::open("libxkbcommon-x11.so").ok()
+        unsafe { XkbCommonX11::open("libxkbcommon-x11.so").ok() }
     };
     pub static ref XKBCOMMON_X11_HANDLE: &'static XkbCommonX11 = {
         XKBCOMMON_X11_OPTION.as_ref().expect("Library libxkbcommon-x11.so could not be loaded.")
