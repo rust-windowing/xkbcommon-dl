@@ -10,6 +10,9 @@ pub mod keysyms;
 #[cfg(feature = "x11")]
 pub mod x11;
 
+use log::info;
+
+use std::fmt;
 use std::os::raw::{c_char, c_int, c_uint, c_void};
 
 pub const XKB_MOD_NAME_SHIFT   : &'static [u8]  = b"Shift\0";
@@ -284,15 +287,37 @@ functions:
 
 lazy_static!(
     pub static ref XKBCOMMON_OPTION: Option<XkbCommon> = {
-        unsafe { XkbCommon::open("libxkbcommon.so") }.ok()
+        open_with_sonames(&["libxkbcommon.so", "libxkbcommon.so.0"], None, |name| unsafe { XkbCommon::open(name) })
     };
     pub static ref XKBCOMMON_HANDLE: &'static XkbCommon = {
         XKBCOMMON_OPTION.as_ref().expect("Library libxkbcommon.so could not be loaded.")
     };
     pub static ref XKBCOMMON_COMPOSE_OPTION: Option<XkbCommonCompose> = {
-        unsafe { XkbCommonCompose::open("libxkbcommon.so") }.ok()
+        open_with_sonames(&["libxkbcommon.so", "libxkbcommon.so.0"], Some("compose"), |name| unsafe { XkbCommonCompose::open(name) })
     };
     pub static ref XKBCOMMON_COMPOSE_HANDLE: &'static XkbCommonCompose = {
         XKBCOMMON_COMPOSE_OPTION.as_ref().expect("Could not load compose module from libxkbcommon.so.")
     };
 );
+
+fn open_with_sonames<T, F>(names: &[&str], module: Option<&str>, open: F) -> Option<T>
+where
+    F: Fn(&str) -> Result<T, dlib::DlError>,
+{
+    for name in names {
+        match open(name) {
+            Ok(l) => return Some(l),
+            Err(e) => {
+                if let Some(module) = module {
+                    info!(
+                        "Failed loading {} module from `{}`. Error: {:?}",
+                        module, name, e
+                    )
+                } else {
+                    info!("Failed loading `{}`. Error: {:?}", name, e)
+                }
+            }
+        }
+    }
+    None
+}
