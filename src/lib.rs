@@ -257,6 +257,7 @@ functions:
     fn xkb_state_key_get_utf32(*mut xkb_state, xkb_keycode_t) -> u32,
     fn xkb_state_key_get_one_sym(*mut xkb_state, xkb_keycode_t) -> xkb_keysym_t,
     fn xkb_state_mod_name_is_active(*mut xkb_state, *const c_char, xkb_state_component) -> c_int,
+    fn xkb_state_mod_index_is_active(*mut xkb_state, xkb_mod_index_t, xkb_state_component) -> c_int,
 );
 
 // Compose and dead-keys support module
