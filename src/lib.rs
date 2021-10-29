@@ -7,7 +7,6 @@ extern crate dlib;
 extern crate lazy_static;
 #[macro_use]
 extern crate bitflags;
-extern crate x11_dl;
 
 pub mod keysyms;
 mod x11;
