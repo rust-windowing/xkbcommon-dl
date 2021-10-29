@@ -1,6 +1,6 @@
 use std::os::raw::c_int;
 
-use x11_dl::xlib_xcb::xcb_connection_t;
+pub type xcb_connection_t = c_void;
 
 use super::*;
 
