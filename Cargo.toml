@@ -11,6 +11,9 @@ edition = "2018"
 [badges]
 travis-ci = { repository = "francesca64/xkbcommon-dl" }
 
+[features]
+x11 = []
+
 [dependencies]
 dlib = "0.5"
 lazy_static = "1.0"
