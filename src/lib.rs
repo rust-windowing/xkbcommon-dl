@@ -6,8 +6,9 @@ use lazy_static::lazy_static;
 use bitflags::bitflags;
 
 pub mod keysyms;
-mod x11;
-pub use self::x11::*;
+
+#[cfg(feature = "x11")]
+pub mod x11;
 
 use std::os::raw::{c_char, c_int, c_uint, c_void};
 
