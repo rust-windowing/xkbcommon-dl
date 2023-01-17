@@ -1,12 +1,9 @@
 #![allow(dead_code, non_camel_case_types)]
 #![cfg_attr(rustfmt, rustfmt_skip)]
 
-#[macro_use]
-extern crate dlib;
-#[macro_use]
-extern crate lazy_static;
-#[macro_use]
-extern crate bitflags;
+use dlib::dlopen_external_library;
+use lazy_static::lazy_static;
+use bitflags::bitflags;
 
 pub mod keysyms;
 mod x11;
