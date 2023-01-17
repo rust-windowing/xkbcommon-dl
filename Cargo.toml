@@ -6,6 +6,7 @@ repository = "https://github.com/francesca64/xkbcommon-dl"
 authors = ["Francesca Frangipane <francesca@comfysoft.net>"]
 license = "MIT"
 description = "Dynamically loaded xkbcommon and xkbcommon-x11 Rust bindings."
+edition = "2018"
 
 [badges]
 travis-ci = { repository = "francesca64/xkbcommon-dl" }
