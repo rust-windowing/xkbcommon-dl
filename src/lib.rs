@@ -12,7 +12,6 @@ pub mod x11;
 
 use log::info;
 
-use std::fmt;
 use std::os::raw::{c_char, c_int, c_uint, c_void};
 
 pub const XKB_MOD_NAME_SHIFT   : &'static [u8]  = b"Shift\0";
