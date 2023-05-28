@@ -1,6 +1,6 @@
 [package]
 name = "xkbcommon-dl"
-version = "0.2.0"
+version = "0.3.0"
 documentation = "https://docs.rs/xkbcommon-dl/"
 repository = "https://github.com/rust-windowing/xkbcommon-dl"
 authors = ["Francesca Frangipane <francesca@comfysoft.net>"]
@@ -16,5 +16,5 @@ x11 = []
 [dependencies]
 dlib = "0.5"
 lazy_static = "1.0"
-bitflags = "1.0"
+bitflags = "2.3.1"
 log = "0.4"

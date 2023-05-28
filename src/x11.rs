@@ -1,6 +1,5 @@
 use std::os::raw::c_int;
 
-use dlib::DlError::CantOpen;
 pub type xcb_connection_t = c_void;
 
 use super::*;
