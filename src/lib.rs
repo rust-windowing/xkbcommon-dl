@@ -223,9 +223,15 @@ functions:
     fn xkb_keymap_ref(*mut xkb_keymap) -> *mut xkb_keymap,
     fn xkb_keymap_unref(*mut xkb_keymap) -> (),
     fn xkb_keymap_get_as_string(*mut xkb_keymap, xkb_keymap_format) -> *const c_char,
-
     fn xkb_keymap_key_get_syms_by_level(*mut xkb_keymap, xkb_keycode_t, xkb_layout_index_t, xkb_level_index_t, *mut *const xkb_keysym_t) -> c_int,
     fn xkb_keymap_key_repeats(*mut xkb_keymap, xkb_keycode_t) -> c_int,
+
+    fn xkb_keymap_min_keycode(*mut xkb_keymap) -> xkb_keycode_t,
+    fn xkb_keymap_max_keycode(*mut xkb_keymap) -> xkb_keycode_t,
+    fn xkb_keymap_key_for_each(*mut xkb_keymap, xkb_keymap_key_iter_t, *mut c_void) -> (),
+    fn xkb_keymap_num_layouts(*mut xkb_keymap) -> xkb_layout_index_t,
+    fn xkb_keymap_num_layouts_for_key(*mut xkb_keymap, xkb_keycode_t) -> xkb_layout_index_t,
+    fn xkb_keymap_num_levels_for_key(*mut xkb_keymap, xkb_keycode_t, xkb_layout_index_t) -> xkb_level_index_t,
 
     fn xkb_state_new(*mut xkb_keymap) -> *mut xkb_state,
     fn xkb_state_ref(*mut xkb_state) -> *mut xkb_state,
@@ -257,6 +263,8 @@ functions:
     ) -> c_int,
     fn xkb_state_key_get_utf32(*mut xkb_state, xkb_keycode_t) -> u32,
     fn xkb_state_key_get_one_sym(*mut xkb_state, xkb_keycode_t) -> xkb_keysym_t,
+    fn xkb_state_key_get_layout(*mut xkb_state, xkb_keycode_t) -> xkb_layout_index_t,
+    fn xkb_state_key_get_level(*mut xkb_state, xkb_keycode_t, xkb_layout_index_t) -> xkb_level_index_t,
     fn xkb_state_mod_name_is_active(*mut xkb_state, *const c_char, xkb_state_component) -> c_int,
     fn xkb_state_mod_index_is_active(*mut xkb_state, xkb_mod_index_t, xkb_state_component) -> c_int,
 );
