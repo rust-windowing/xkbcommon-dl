@@ -1,5 +1,7 @@
 use std::os::raw::c_int;
 
+use once_cell::sync::Lazy;
+
 pub type xcb_connection_t = c_void;
 
 use super::*;
@@ -40,17 +42,15 @@ functions:
     ) -> *mut xkb_state,
 );
 
-lazy_static!(
-    pub static ref XKBCOMMON_X11_OPTION: Option<XkbCommonX11> = {
-        open_with_sonames(
-            &["libxkbcommon-x11.so", "libxkbcommon-x11.so.0"],
-            None,
-            |name| unsafe { XkbCommonX11::open(name) },
-        )
-    };
-    pub static ref XKBCOMMON_X11_HANDLE: &'static XkbCommonX11 = {
-        XKBCOMMON_X11_OPTION
-            .as_ref()
-            .expect("Library libxkbcommon-x11.so could not be loaded.")
-    };
-);
+pub static XKBCOMMON_X11_OPTION: Lazy<Option<XkbCommonX11>> = Lazy::new(|| {
+    open_with_sonames(
+        &["libxkbcommon-x11.so", "libxkbcommon-x11.so.0"],
+        None,
+        |name| unsafe { XkbCommonX11::open(name) },
+    )
+});
+pub static XKBCOMMON_X11_HANDLE: Lazy<&'static XkbCommonX11> = Lazy::new(|| {
+    XKBCOMMON_X11_OPTION
+        .as_ref()
+        .expect("Library libxkbcommon-x11.so could not be loaded.")
+});
