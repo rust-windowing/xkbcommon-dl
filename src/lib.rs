@@ -1,29 +1,27 @@
 #![allow(dead_code, non_camel_case_types)]
-#![cfg_attr(rustfmt, rustfmt_skip)]
 
-use dlib::dlopen_external_library;
-use lazy_static::lazy_static;
+use std::os::raw::{c_char, c_int, c_uint, c_void};
+
 use bitflags::bitflags;
+use dlib::dlopen_external_library;
+use log::info;
+use once_cell::sync::Lazy;
 
 pub mod keysyms;
 
 #[cfg(feature = "x11")]
 pub mod x11;
 
-use log::info;
+pub const XKB_MOD_NAME_SHIFT: &[u8] = b"Shift\0";
+pub const XKB_MOD_NAME_CAPS: &[u8] = b"Lock\0";
+pub const XKB_MOD_NAME_CTRL: &[u8] = b"Control\0";
+pub const XKB_MOD_NAME_ALT: &[u8] = b"Mod1\0";
+pub const XKB_MOD_NAME_NUM: &[u8] = b"Mod2\0";
+pub const XKB_MOD_NAME_LOGO: &[u8] = b"Mod4\0";
 
-use std::os::raw::{c_char, c_int, c_uint, c_void};
-
-pub const XKB_MOD_NAME_SHIFT   : &'static [u8]  = b"Shift\0";
-pub const XKB_MOD_NAME_CAPS    : &'static [u8]  = b"Lock\0";
-pub const XKB_MOD_NAME_CTRL    : &'static [u8]  = b"Control\0";
-pub const XKB_MOD_NAME_ALT     : &'static [u8]  = b"Mod1\0";
-pub const XKB_MOD_NAME_NUM     : &'static [u8]  = b"Mod2\0";
-pub const XKB_MOD_NAME_LOGO    : &'static [u8]  = b"Mod4\0";
-
-pub const XKB_LED_NAME_CAPS    : &'static [u8]  = b"Caps Lock\0";
-pub const XKB_LED_NAME_NUM     : &'static [u8]  = b"Num Lock\0";
-pub const XKB_LED_NAME_SCROLL  : &'static [u8]  = b"Scroll Lock\0";
+pub const XKB_LED_NAME_CAPS: &[u8] = b"Caps Lock\0";
+pub const XKB_LED_NAME_NUM: &[u8] = b"Num Lock\0";
+pub const XKB_LED_NAME_SCROLL: &[u8] = b"Scroll Lock\0";
 
 pub struct xkb_context;
 pub struct xkb_keymap;
@@ -42,18 +40,18 @@ pub type xkb_led_index_t = u32;
 pub type xkb_led_mask_t = u32;
 pub type xkb_keymap_key_iter_t = Option<extern "C" fn(*mut xkb_keymap, xkb_keycode_t, *mut c_void)>;
 
-pub const XKB_KEYCODE_INVALID :u32 = 0xffffffff;
-pub const XKB_LAYOUT_INVALID  :u32 = 0xffffffff;
-pub const XKB_LEVEL_INVALID   :u32 = 0xffffffff;
-pub const XKB_MOD_INVALID     :u32 = 0xffffffff;
-pub const XKB_LED_INVALID     :u32 = 0xffffffff;
-pub const XKB_KEYCODE_MAX     :u32 = 0xffffffff - 1;
+pub const XKB_KEYCODE_INVALID: u32 = 0xffffffff;
+pub const XKB_LAYOUT_INVALID: u32 = 0xffffffff;
+pub const XKB_LEVEL_INVALID: u32 = 0xffffffff;
+pub const XKB_MOD_INVALID: u32 = 0xffffffff;
+pub const XKB_LED_INVALID: u32 = 0xffffffff;
+pub const XKB_KEYCODE_MAX: u32 = 0xffffffff - 1;
 
 #[repr(C)]
 pub struct xkb_rule_names {
-    pub rules:   *const c_char,
-    pub model:   *const c_char,
-    pub layout:  *const c_char,
+    pub rules: *const c_char,
+    pub model: *const c_char,
+    pub layout: *const c_char,
     pub variant: *const c_char,
     pub options: *const c_char,
 }
@@ -284,20 +282,30 @@ functions:
     fn xkb_compose_state_get_one_sym(*mut xkb_compose_state) -> xkb_keysym_t,
 );
 
-lazy_static!(
-    pub static ref XKBCOMMON_OPTION: Option<XkbCommon> = {
-        open_with_sonames(&["libxkbcommon.so", "libxkbcommon.so.0"], None, |name| unsafe { XkbCommon::open(name) })
-    };
-    pub static ref XKBCOMMON_HANDLE: &'static XkbCommon = {
-        XKBCOMMON_OPTION.as_ref().expect("Library libxkbcommon.so could not be loaded.")
-    };
-    pub static ref XKBCOMMON_COMPOSE_OPTION: Option<XkbCommonCompose> = {
-        open_with_sonames(&["libxkbcommon.so", "libxkbcommon.so.0"], Some("compose"), |name| unsafe { XkbCommonCompose::open(name) })
-    };
-    pub static ref XKBCOMMON_COMPOSE_HANDLE: &'static XkbCommonCompose = {
-        XKBCOMMON_COMPOSE_OPTION.as_ref().expect("Could not load compose module from libxkbcommon.so.")
-    };
-);
+pub static XKBCOMMON_OPTION: Lazy<Option<XkbCommon>> = Lazy::new(|| {
+    open_with_sonames(
+        &["libxkbcommon.so", "libxkbcommon.so.0"],
+        None,
+        |name| unsafe { XkbCommon::open(name) },
+    )
+});
+pub static XKBCOMMON_HANDLE: Lazy<&'static XkbCommon> = Lazy::new(|| {
+    XKBCOMMON_OPTION
+        .as_ref()
+        .expect("Library libxkbcommon.so could not be loaded.")
+});
+pub static XKBCOMMON_COMPOSE_OPTION: Lazy<Option<XkbCommonCompose>> = Lazy::new(|| {
+    open_with_sonames(
+        &["libxkbcommon.so", "libxkbcommon.so.0"],
+        Some("compose"),
+        |name| unsafe { XkbCommonCompose::open(name) },
+    )
+});
+pub static XKBCOMMON_COMPOSE_HANDLE: Lazy<&'static XkbCommonCompose> = Lazy::new(|| {
+    XKBCOMMON_COMPOSE_OPTION
+        .as_ref()
+        .expect("Could not load compose module from libxkbcommon.so.")
+});
 
 fn open_with_sonames<T, F>(names: &[&str], module: Option<&str>, open: F) -> Option<T>
 where
