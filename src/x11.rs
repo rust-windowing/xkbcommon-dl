@@ -1,6 +1,6 @@
 use std::os::raw::c_int;
 
-use once_cell::sync::Lazy;
+use once_cell::sync::OnceCell;
 
 pub type xcb_connection_t = c_void;
 
@@ -42,15 +42,19 @@ functions:
     ) -> *mut xkb_state,
 );
 
-pub static XKBCOMMON_X11_OPTION: Lazy<Option<XkbCommonX11>> = Lazy::new(|| {
-    open_with_sonames(
-        &["libxkbcommon-x11.so", "libxkbcommon-x11.so.0"],
-        None,
-        |name| unsafe { XkbCommonX11::open(name) },
-    )
-});
-pub static XKBCOMMON_X11_HANDLE: Lazy<&'static XkbCommonX11> = Lazy::new(|| {
+pub fn xkbcommon_x11_option() -> Option<&'static XkbCommonX11> {
+    static XKBCOMMON_X11_OPTION: OnceCell<Option<XkbCommonX11>> = OnceCell::new();
     XKBCOMMON_X11_OPTION
+        .get_or_init(|| {
+            open_with_sonames(
+                &["libxkbcommon-x11.so", "libxkbcommon-x11.so.0"],
+                None,
+                |name| unsafe { XkbCommonX11::open(name) },
+            )
+        })
         .as_ref()
-        .expect("Library libxkbcommon-x11.so could not be loaded.")
-});
+}
+
+pub fn xkbcommon_x11_handle() -> &'static XkbCommonX11 {
+    xkbcommon_x11_option().expect("Library libxkbcommon-x11.so could not be loaded.")
+}
