@@ -5,7 +5,7 @@ use std::os::raw::{c_char, c_int, c_uint, c_void};
 use bitflags::bitflags;
 use dlib::dlopen_external_library;
 use log::info;
-use once_cell::sync::Lazy;
+use once_cell::sync::OnceCell;
 
 pub mod keysyms;
 
@@ -290,30 +290,39 @@ functions:
     fn xkb_compose_state_get_one_sym(*mut xkb_compose_state) -> xkb_keysym_t,
 );
 
-pub static XKBCOMMON_OPTION: Lazy<Option<XkbCommon>> = Lazy::new(|| {
-    open_with_sonames(
-        &["libxkbcommon.so", "libxkbcommon.so.0"],
-        None,
-        |name| unsafe { XkbCommon::open(name) },
-    )
-});
-pub static XKBCOMMON_HANDLE: Lazy<&'static XkbCommon> = Lazy::new(|| {
+pub fn xkbcommon_handle() -> &'static XkbCommon {
+    xkbcommon_option().expect("Library libxkbcommon.so could not be loaded.")
+}
+
+pub fn xkbcommon_option() -> Option<&'static XkbCommon> {
+    static XKBCOMMON_OPTION: OnceCell<Option<XkbCommon>> = OnceCell::new();
     XKBCOMMON_OPTION
+        .get_or_init(|| {
+            open_with_sonames(
+                &["libxkbcommon.so", "libxkbcommon.so.0"],
+                None,
+                |name| unsafe { XkbCommon::open(name) },
+            )
+        })
         .as_ref()
-        .expect("Library libxkbcommon.so could not be loaded.")
-});
-pub static XKBCOMMON_COMPOSE_OPTION: Lazy<Option<XkbCommonCompose>> = Lazy::new(|| {
-    open_with_sonames(
-        &["libxkbcommon.so", "libxkbcommon.so.0"],
-        Some("compose"),
-        |name| unsafe { XkbCommonCompose::open(name) },
-    )
-});
-pub static XKBCOMMON_COMPOSE_HANDLE: Lazy<&'static XkbCommonCompose> = Lazy::new(|| {
+}
+
+pub fn xkbcommon_compose_handle() -> &'static XkbCommonCompose {
+    xkbcommon_compose_option().expect("Could not load compose module from libxkbcommon.so.")
+}
+
+pub fn xkbcommon_compose_option() -> Option<&'static XkbCommonCompose> {
+    static XKBCOMMON_COMPOSE_OPTION: OnceCell<Option<XkbCommonCompose>> = OnceCell::new();
     XKBCOMMON_COMPOSE_OPTION
+        .get_or_init(|| {
+            open_with_sonames(
+                &["libxkbcommon.so", "libxkbcommon.so.0"],
+                Some("compose"),
+                |name| unsafe { XkbCommonCompose::open(name) },
+            )
+        })
         .as_ref()
-        .expect("Could not load compose module from libxkbcommon.so.")
-});
+}
 
 fn open_with_sonames<T, F>(names: &[&str], module: Option<&str>, open: F) -> Option<T>
 where
