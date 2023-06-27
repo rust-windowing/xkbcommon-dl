@@ -7,8 +7,6 @@ extern crate xkeysym;
 
 #[doc(inline)]
 pub use xkeysym::key as keysyms;
-mod x11;
-pub use self::x11::*;
 
 use std::os::raw::{c_char, c_int, c_uint, c_void};
 
