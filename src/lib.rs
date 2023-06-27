@@ -1,4 +1,12 @@
 #![allow(dead_code, non_camel_case_types)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
+
+extern crate dlib;
+extern crate bitflags;
+extern crate xkeysym;
+
+#[doc(inline)]
+pub use xkeysym::key as keysyms;
 
 use std::os::raw::{c_char, c_int, c_uint, c_void};
 
@@ -6,8 +14,6 @@ use bitflags::bitflags;
 use dlib::dlopen_external_library;
 use log::info;
 use once_cell::sync::OnceCell;
-
-pub mod keysyms;
 
 #[cfg(feature = "x11")]
 pub mod x11;
