@@ -47,7 +47,7 @@ pub fn xkbcommon_x11_option() -> Option<&'static XkbCommonX11> {
     XKBCOMMON_X11_OPTION
         .get_or_init(|| {
             open_with_sonames(
-                &["libxkbcommon-x11.so", "libxkbcommon-x11.so.0"],
+                &["libxkbcommon-x11.so.0", "libxkbcommon-x11.so"],
                 None,
                 |name| unsafe { XkbCommonX11::open(name) },
             )
