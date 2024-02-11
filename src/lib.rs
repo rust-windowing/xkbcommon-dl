@@ -239,6 +239,9 @@ functions:
     fn xkb_keymap_num_layouts_for_key(*mut xkb_keymap, xkb_keycode_t) -> xkb_layout_index_t,
     fn xkb_keymap_num_levels_for_key(*mut xkb_keymap, xkb_keycode_t, xkb_layout_index_t) -> xkb_level_index_t,
 
+    fn xkb_keymap_mod_get_name(*mut xkb_keymap, xkb_mod_index_t) -> *const c_char,
+    fn xkb_keymap_mod_get_index(*mut xkb_keymap, *const c_char) -> xkb_mod_index_t,
+
     fn xkb_state_new(*mut xkb_keymap) -> *mut xkb_state,
     fn xkb_state_ref(*mut xkb_state) -> *mut xkb_state,
     fn xkb_state_unref(*mut xkb_state) -> (),
